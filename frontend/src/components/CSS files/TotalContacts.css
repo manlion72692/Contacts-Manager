@@ -1,177 +1,276 @@
 .total_contacts {
-    border: 1px solid black;
-    width: auto;
-    height: 100vh;
-    display: flex;
-  }
-  .left_div {
-    border: 1px solid black;
-    width: 15%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #CEF3FF;
-  }
-  .dashboard {
-    /* border: 1px solid black; */
-    display: flex;
-    margin-top: 30px;
-    flex-direction: row;
-  }
-  .box {
-    /* border: 1px solid black; */
-    width: 140px;
-    height: 40px;
-    margin-top: 30px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #2DA5FC;
-  }
-  .logout {
-    /* border: 1px solid black; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 450px;
-  }
-  .right_div {
-    border: 1px solid black;
-    width: 85%;
-    height: 100%;
-  }
-  .top_right_div {
-    border: 1px solid black;
-    width: 100%;
-    height: 10%;
-  }
-  .navbar {
-    display: flex;
-  }
-  .search_bar {
-    /* border: 1px solid black; */
-    background-color: #F2F2F2;
-    display: flex;
-    margin-top: 15px;
-    margin-left: 223px;
-    flex-direction: row;
-  }
-  .search_img {
-    margin-top: 5px;
-    margin-left: 10px;
-    background-color: #F2F2F2;
-  }
-  /* input {
-    margin-top: 0;
-    outline: none;
-  } */
-  .search_input {
-    width: 350px;
-    margin-top: 5px;
-    background-color: #F2F2F2;
-  }
-  .admin {
-    /* border: 1px solid black; */
-    width: 150px;
-    height: 50px;
-    margin-top: 9px;
-    margin-left: 170px;
-    display: flex;
-    flex-direction: row;
-  }
-  .admin_photo {
-    border: 1px solid rgb(233, 233, 233);
-    width: 50px;
-    height: 45px;
-    border-radius: 50%;
-    margin-left: 10px;
-    margin-top: 4px;
-  }
-  .name {
-    /* border: 1px solid black; */
-    width: 70%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-  span {
-    margin: 4px;
-    font-family: Titillium Web;
-  }
-  .middle_right_div {
-    border: 1px solid black;
-    width: 100%;
-    height: 10%;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-  }
-  .date {
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 125px;
-    height: 25px; 
-    border-radius: 5px;
-    margin-left: 15px;
-  }
-  .filter {
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 125px;
-    height: 25px; 
-    border-radius: 5px;
-    margin-left: 15px;
-  }
-  .delete {
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 125px;
-    height: 25px; 
-    border-radius: 5px;
-    margin-left: 475px;
-  }
-  .import {
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 125px;
-    height: 25px; 
-    border-radius: 5px;
-    margin-left: 15px;
-  }
-  .export {
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 125px;
-    height: 25px; 
-    border-radius: 5px;
-    margin-left: 15px;
-  }
-  button {
-    margin-top: 0;
-    background-color: white;
-    color: black;
-    height: 23px;
-    margin-top: -2px;
-    margin-left: 0px;  
-  }
-  .right_end_div {
-    /* border: 1px solid black; */
-    width: 90%;
-    height: 5%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  border: 1px solid black;
+  width: auto;
+  height: 100vh;
+  display: flex;
+}
+.left_div {
+  border: 1px solid black;
+  width: 15%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #CEF3FF;
+}
+.dashboard {
+  /* border: 1px solid black; */
+  display: flex;
+  margin-top: 30px;
+  flex-direction: row;
+}
+.box {
+  /* border: 1px solid black; */
+  width: 140px;
+  height: 40px;
+  margin-top: 30px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2DA5FC;
+}
+.logout {
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 450px;
+}
+.right_div {
+  border: 1px solid black;
+  width: 85%;
+  height: 100%;
+}
+.top_right_div {
+  /* border: 1px solid black; */
+  width: 100%;
+  height: 10%;
+}
+.navbar {
+  display: flex;
+}
+.search_bar {
+  /* border: 1px solid black; */
+  background-color: #F2F2F2;
+  display: flex;
+  margin-top: 15px;
+  margin-left: 223px;
+  flex-direction: row;
+}
+.search_img {
+  margin-top: 5px;
+  margin-left: 10px;
+  background-color: #F2F2F2;
+}
+
+.search_input {
+  width: 350px;
+  margin-top: 5px;
+  background-color: #F2F2F2;
+}
+.admin {
+  /* border: 1px solid black; */
+  width: 150px;
+  height: 50px;
+  margin-top: 9px;
+  margin-left: 170px;
+  display: flex;
+  flex-direction: row;
+}
+.admin_photo {
+  border: 1px solid rgb(233, 233, 233);
+  width: 50px;
+  height: 45px;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-top: 4px;
+}
+.name {
+  /* border: 1px solid black; */
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+span {
+  margin: 4px;
+  font-family: Titillium Web;
+}
+.middle_right_div {
+  /* border: 1px solid black; */
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.date {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 125px;
+  height: 25px; 
+  border-radius: 5px;
+  margin-left: 15px;
+}
+.filter {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 125px;
+  height: 25px; 
+  border-radius: 5px;
+  margin-left: 15px;
+}
+.delete {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 125px;
+  height: 25px; 
+  border-radius: 5px;
+  margin-left: 475px;
+}
+.import {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 125px;
+  height: 25px; 
+  border-radius: 5px;
+  margin-left: 15px;
+}
+.export {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 125px;
+  height: 25px; 
+  border-radius: 5px;
+  margin-left: 15px;
+}
+button {
+  margin-top: 0;
+  background-color: white;
+  color: black;
+  height: 23px;
+  margin-top: -2px;
+  margin-left: 0px;  
+}
+.right_end_div {
+  /* border: 1px solid black; */
+  border-radius: 10px;
+  width: 98%;
+  height: 80%;
+  /* overflow: auto; */
+  display: flex;
+  margin: auto;
+  /* margin-top: 20px; */
+  align-items: center;
+  justify-content: space-evenly;
+  /* background-color: #B2DFFF; */
+}
+table {
+  width: 100%;
+  height: 100%;
+  border-radius: 15%;
+  /* table-layout: auto; */
+  border-collapse: collapse;
+}
+thead tr{
+  border: 1px solid black;
+  border-radius: 20px;
+}
+thead tr {
+  background-color: #B2DFFF;
+}
+table th {
+  padding: 10px;
+}
+tbody tr:nth-child(even) {
+  background-color: #FBFBFB;
+  border-radius: 15px;
+}
+tbody tr:nth-child(odd) {
+  background-color: rgba(178, 223, 255, 0.31);; /* Set the background color for odd rows */
+}
+.action {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+.image-button {
+  border: none;
+  background: none;
+  padding:0;
+}
+.image-button img {
+  max-width: 49%;
+  max-height: 49%;
+}
+.file-upload-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background for blur effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Ensure it appears above other content */
+}
+.file-upload-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+.upload-icon {
+  font-size: 48px;
+  color: #007bff; /* Blue color for the upload icon */
+  margin-bottom: 20px;
+}
+.upload-text {
+  font-size: 18px;
+  color: #333;
+}
+/* input[type="file"] {
+  display: none; /* Hide the file input
+} */
+.upload-button {
+  background-color: #007bff; /* Blue color for the button */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+.upload-button:hover {
+  background-color: #0056b3; /* Darker blue color on hover */
+}
+.close-button {
+  background-color: #e74c3c; /* Red color for the close button */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+.close-button:hover {
+  background-color: #c04131; /* Darker red color on hover */
+}
