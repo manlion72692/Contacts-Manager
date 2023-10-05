@@ -1,0 +1,11 @@
+const express = require("express");
+const router = express.Router();
+const contactController = require("../controllers/contactController");
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+router.get(`/contacts`, contactController.getAllContacts);
+router.post(`/contacts`, contactController.createContact);
+router.put(`/contacts/:id`, contactController.updateContact);
+router.delete(`/contacts/:id`, contactController.deleteContact);
+router.post(`/upload-csv`, upload.single('csvFile'), contactController.uploadCSV);
+module.exports = router;
