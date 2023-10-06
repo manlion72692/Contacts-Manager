@@ -49,27 +49,21 @@ exports.deleteContact = async (req, res) => {
         res.status(500).json({ message: "Servor Error"});
     }
 }
-exports.uploadCSV = async (req, res) => {
+exports.deleteSelectedContacts = async (req, res) => {
     try {
-        if (!req.file) {
-            return res.status(400).json({ message: 'No file uploaded' });
+        const { selectedRows } = req.body;
+        if (!selectedRows || !Array.isArray(selectedRows) || selectedRows.length === 0) {
+            return res.status(400).json({ message: "Invalid selected rows data" });
         }
-        const results = [];
-        fs.createReadStream(req.file.path)
-            .pipe(csv())
-            .on('data', (data) => results.push(data))
-            .on('end', async () => {
-                // Insert the data from the CSV file into your database
-                for (const row of results) {
-                    const newContact = new Contact(row);
-                    await newContact.save();
-                }
-                // Remove the temporary CSV file
-                fs.unlinkSync(req.file.path);
-                res.status(200).json({ message: 'CSV file uploaded successfully' });
-            });
+        // Use the selectedRows array to delete contacts
+        const deletedContacts = await Contact.deleteMany({ _id: { $in: selectedRows } });
+        if (deletedContacts.deletedCount > 0) {
+            return res.status(200).json({ message: "Selected contacts deleted successfully" });
+        } else {
+            return res.status(404).json({ message: "Contacts not found" });
+        }
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server Error' });
+        res.status(500).json({ message: "Server Error" });
     }
 };
