@@ -7,9 +7,9 @@ import axios from 'axios';
 const TotalContacts = () => {
 
     const [contacts, setContacts] = useState([]);
-    const [selectedContacts, setSelectedContacts] = useState([]);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState('');
+    const [selectedRows, setSelectedRows] = useState([]);
 
     const [isEditing, setIsEditing] = useState(false);
     const [editedContact, setEditedContact] = useState({});
@@ -91,6 +91,32 @@ const TotalContacts = () => {
             .catch((error) => console.error("Error deleting contact:", error))
     }   
 
+    const handleCheckboxChange = (contactId) => {
+        if (selectedRows.includes(contactId)) {
+            setSelectedRows((prevSelected) => prevSelected.filter((id) => id !== contactId));
+        } else {
+            setSelectedRows((prevSelected) => [...prevSelected, contactId]);
+        }
+    };
+
+    const handleDeleteClick = () => {
+        axios
+            .delete("/api/contacts", { data: { selectedRows } })
+            .then((response) => {
+                if (response.status === 200) {
+                    // Update the contacts list to remove deleted rows
+                    setContacts((prevContacts) =>
+                        prevContacts.filter((contact) => !selectedRows.includes(contact._id))
+                    );
+                    // Clear selected rows
+                    setSelectedRows([]);
+                } else {
+                    console.error("Error deleting contacts:", response.data);
+                }
+            })
+            .catch((error) => console.error("Error deleting contacts:", error));
+    };
+
         return (
             <div className="total_contacts">
                 <div className="left_div">
@@ -138,7 +164,7 @@ const TotalContacts = () => {
                             &nbsp;<img src="/Images/filter.png" alt="date" width="15px" height="15px" /><button style={{ fontWeight: "Bold", marginTop: '0px', height: '25px', color: 'black', backgroundColor: 'white' }}>Filter</button><img src="/Images/dropdown.png" alt="dropdown" />
                         </div>
                         <div className="delete">
-                            &nbsp;<img src="/Images/delete.png" alt="date" width="15px" height="15px" /><button style={{ fontWeight: "Bold", marginTop: '0px', height: '25px', color: 'black', backgroundColor: 'white' }}>Delete</button>
+                            &nbsp;<img src="/Images/delete.png" alt="date" width="15px" height="15px" /><button onClick={handleDeleteClick} style={{ fontWeight: "Bold", marginTop: '0px', height: '25px', color: 'black', backgroundColor: 'white' }}>Delete</button>
                         </div>
                         <div className="import">
                             &nbsp;<img src="/Images/import.png" alt="import" /><button style={{ fontWeight: 'Bold', marginTop: '0px', height: '25px', color: 'black', backgroundColor: 'white' }}>Import</button>
@@ -167,7 +193,10 @@ const TotalContacts = () => {
                                     <tr key={contact._id}>
                                         <td>
                                             <input
-                                                type="checkbox" />
+                                                type="checkbox"
+                                                onChange={() => handleCheckboxChange(contact._id)}
+                                                checked={selectedRows.includes(contact._id)}
+                                             />
                                         </td>
                                         {/* <td>{contact.name}</td> */}
                                         {/* <td>{contact.designation}</td> */}
