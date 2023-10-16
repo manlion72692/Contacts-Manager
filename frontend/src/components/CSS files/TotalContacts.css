@@ -65,7 +65,8 @@
 }
 
 .search_input {
-  width: 350px;
+  /* width: 350px; */
+  width: 100%;
   margin-top: 5px;
   background-color: #F2F2F2;
 }
@@ -74,7 +75,7 @@
   width: 150px;
   height: 50px;
   margin-top: 9px;
-  margin-left: 170px;
+  margin-left: 400px;
   display: flex;
   flex-direction: row;
 }
@@ -164,18 +165,22 @@ button {
   margin-top: -2px;
   margin-left: 0px;  
 }
+.search-results-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Vertically center-align the items */
+  justify-content: space-between; /* Space evenly between items */
+  padding: 15px 0; /* Add some padding for spacing */
+}
 .right_end_div {
-  /* border: 1px solid black; */
   border-radius: 10px;
   width: 98%;
-  height: 80%;
-  /* overflow: auto; */
+  height: auto;
   display: flex;
   margin: auto;
-  /* margin-top: 20px; */
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-evenly;
-  /* background-color: #B2DFFF; */
+  flex-direction: column; /* Change to column to stack content vertically */
 }
 table {
   width: 100%;
@@ -215,7 +220,7 @@ tbody tr:nth-child(odd) {
 .action {
   display: flex;
   align-items: center;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 .image-button {
   border: none;
@@ -223,6 +228,7 @@ tbody tr:nth-child(odd) {
   padding:0;
 }
 .image-button img {
+  margin-right: 10px;
   max-width: 49%;
   max-height: 49%;
 }

@@ -1,3 +1,5 @@
+
+
 import Logout from '../pages/Logout';
 import '../CSS files/TotalContacts.css';
 import React, { useEffect, useState } from 'react';
@@ -20,21 +22,16 @@ const TotalContacts = () => {
                 setContacts(response.data);
             })
             .catch(error => console.error("Error fetching contacts:", error))
-    },[]);
+    }, []);
 
     const fetchContacts = () => {
-        let apiUrl = "/api/contacts";
-
-        if (search) {
-            apiUrl += `?search=${search}`
-        }
-
-        axios.get(apiUrl)
-            .then(response => {
+        axios
+            .get("/api/contacts")
+            .then((response) => {
                 setContacts(response.data);
             })
-            .catch(error => console.error("Error fetching contacts", error))
-    }
+            .catch((error) => console.error("Error fetching contacts", error));
+    };
 
     const handleEnterKeyPress = (event) => {
         if (event.key === 'Enter') {
@@ -67,9 +64,23 @@ const TotalContacts = () => {
     }
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setEditedContact({ ...editedContact, [name]: value });
-    }
+        if (isEditing) {
+            const { name, value } = event.target;
+            setEditedContact((prevEditedContact) => ({
+                ...prevEditedContact,
+                [name]: value,
+            }));
+        } else {
+            const { value } = event.target;
+            setSearch(value);
+
+            if (value.trim() === "") {
+                // If the search input is empty, show all contacts
+                fetchContacts();
+            }
+        }
+    };
+
 
     const deleteContact = (contactId) => {
         axios.delete(`/api/contacts/${contactId}`)
@@ -247,72 +258,142 @@ const TotalContacts = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {contacts.map((contact) => (
-                                <tr key={contact._id}>
-                                    <td>
-                                        <input
-                                            type="checkbox"
-                                            className="single_checkbox"
-                                            onChange={() => handleCheckboxChange(contact._id)}
-                                            checked={selectedRows.includes(contact._id)}
-                                        />
-                                    </td>
-                                    {/* <td>{contact.name}</td> */}
-                                    {/* <td>{contact.designation}</td> */}
-                                    {/* <td>{contact.company}</td> */}
-                                    {/* <td>{contact.industry}</td> */}
-                                    {/* <td>{contact.email}</td> */}
-                                    {/* <td>{contact.phone}</td> */}
-                                    {/* <td>{contact.country}</td> */}
-                                    <td>{isEditing && editedContact._id === contact._id ? (<input
-                                        type="text"
-                                        name="name"
-                                        value={editedContact.name}
-                                        onChange={handleInputChange}
-                                    />) : (contact.name)}</td>
-                                    <td>{isEditing && editedContact._id === contact._id ? (<input
-                                        type="text"
-                                        name="designation"
-                                        value={editedContact.designation}
-                                        onChange={handleInputChange}
-                                    />) : (contact.designation)}</td>
-                                    <td>{isEditing && editedContact._id === contact._id ? (<input
-                                        type="text"
-                                        name="company"
-                                        value={editedContact.company}
-                                        onChange={handleInputChange}
-                                    />) : (contact.company)}</td>
-                                    <td>{isEditing && editedContact._id === contact._id ? (<input
-                                        type="text"
-                                        name="industry"
-                                        value={editedContact.industry}
-                                        onChange={handleInputChange}
-                                    />) : (contact.industry)}</td>
-                                    <td>{isEditing && editedContact._id === contact._id ? (<input
-                                        type="text"
-                                        name="email"
-                                        value={editedContact.email}
-                                        onChange={handleInputChange}
-                                    />) : (contact.email)}</td>
-                                    <td>{isEditing && editedContact._id === contact._id ? (<input
-                                        type="text"
-                                        name="phone"
-                                        value={editedContact.phone}
-                                        onChange={handleInputChange}
-                                    />) : (contact.phone)}</td>
-                                    <td>{isEditing && editedContact._id === contact._id ? (<input
-                                        type="text"
-                                        name="country"
-                                        value={editedContact.country}
-                                        onChange={handleInputChange}
-                                    />) : (contact.country)}</td>
+                            {contacts
+                                .filter((contact) => {
+                                    if (!search.trim()) {
+                                        return true;
+                                    }
+                                    return contact.email
+                                        .toLowerCase()
+                                        .includes(search.toLowerCase());
+                                })
+                                .map((contact) => (
+                                    <tr key={contact._id}>
+                                        <td>
+                                            <input
+                                                type="checkbox"
+                                                className="single_checkbox"
+                                                onChange={() => handleCheckboxChange(contact._id)}
+                                                checked={selectedRows.includes(contact._id)}
+                                            />
+                                        </td>
+                                        {/* <td>{contact.name}</td> */}
+                                        {/* <td>{contact.designation}</td> */}
+                                        {/* <td>{contact.company}</td> */}
+                                        {/* <td>{contact.industry}</td> */}
+                                        {/* <td>{contact.email}</td> */}
+                                        {/* <td>{contact.phone}</td> */}
+                                        {/* <td>{contact.country}</td> */}
+                                        <td>
+                                            {isEditing && editedContact._id === contact._id ? (
+                                                <input
+                                                    type="text"
+                                                    name="name"
+                                                    value={editedContact.name}
+                                                    onChange={handleInputChange}
+                                                />
+                                            ) : (
+                                                contact.name
+                                            )}
+                                        </td>
+                                        <td>
+                                            {isEditing && editedContact._id === contact._id ? (
+                                                <input
+                                                    type="text"
+                                                    name="designation"
+                                                    value={editedContact.designation}
+                                                    onChange={handleInputChange}
+                                                />
+                                            ) : (
+                                                contact.designation
+                                            )}
+                                        </td>
+                                        <td>
+                                            {isEditing && editedContact._id === contact._id ? (
+                                                <input
+                                                    type="text"
+                                                    name="company"
+                                                    value={editedContact.company}
+                                                    onChange={handleInputChange}
+                                                />
+                                            ) : (
+                                                contact.company
+                                            )}
+                                        </td>
+                                        <td>
+                                            {isEditing && editedContact._id === contact._id ? (
+                                                <input
+                                                    type="text"
+                                                    name="industry"
+                                                    value={editedContact.industry}
+                                                    onChange={handleInputChange}
+                                                />
+                                            ) : (
+                                                contact.industry
+                                            )}
+                                        </td>
+                                        <td>
+                                            {isEditing && editedContact._id === contact._id ? (
+                                                <input
+                                                    type="text"
+                                                    name="email"
+                                                    value={editedContact.email}
+                                                    onChange={handleInputChange}
+                                                />
+                                            ) : (
+                                                contact.email
+                                            )}
+                                        </td>
+                                        <td>
+                                            {isEditing && editedContact._id === contact._id ? (
+                                                <input
+                                                    type="text"
+                                                    name="phone"
+                                                    value={editedContact.phone}
+                                                    onChange={handleInputChange}
+                                                />
+                                            ) : (
+                                                contact.phone
+                                            )}
+                                        </td>
+                                        <td>
+                                            {isEditing && editedContact._id === contact._id ? (
+                                                <input
+                                                    type="text"
+                                                    name="country"
+                                                    value={editedContact.country}
+                                                    onChange={handleInputChange}
+                                                />
+                                            ) : (
+                                                contact.country
+                                            )}
+                                        </td>
 
-                                    <td className="action">
-                                        {isEditing && editedContact._id === contact._id ? (<button className="image-button" onClick={saveEditedContact}>Save</button>) : (<button className="image-button" onClick={() => handleEditClick(contact)}><img src="/Images/edit.png" alt="edit" /></button>)}
-                                        <button className="image-button" onClick={() => deleteContact(contact._id)}><img src="/Images/red_delete.png" alt="delete" /></button>
-                                    </td>
-                                </tr>
-                            ))}
+                                        <td className="action">
+                                            {isEditing && editedContact._id === contact._id ? (
+                                                <button
+                                                    className="image-button"
+                                                    onClick={saveEditedContact}
+                                                >
+                                                    Save
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    className="image-button"
+                                                    onClick={() => handleEditClick(contact)}
+                                                >
+                                                    <img src="/Images/edit.png" alt="edit" />
+                                                </button>
+                                            )}
+                                            <button
+                                                className="image-button"
+                                                onClick={() => deleteContact(contact._id)}
+                                            >
+                                                <img src="/Images/red_delete.png" alt="delete" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
                         </tbody>
                     </table>
                 </div>
@@ -321,3 +402,4 @@ const TotalContacts = () => {
     )
 }
 export default TotalContacts;
+
